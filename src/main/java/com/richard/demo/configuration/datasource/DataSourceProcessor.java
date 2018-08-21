@@ -42,7 +42,7 @@ public class DataSourceProcessor implements BeanPostProcessor, BeanFactoryAware,
                 || !beanName.endsWith(dataSource.getPoolName() + "DataSource")) {
             return originDataSource;
         }
-        String prefix = "synnex.datasource." + dataSource.getPoolName() + ".";
+        String prefix = "richard.datasource." + dataSource.getPoolName() + ".";
 
         dataSource.setJdbcUrl(environment.getProperty(prefix + "url"));
         dataSource.setDriverClassName(environment.getProperty(prefix + "driverClassName"));
@@ -68,7 +68,7 @@ public class DataSourceProcessor implements BeanPostProcessor, BeanFactoryAware,
             return emf;
         }
 
-        String prefix = "synnex.datasource." + emf.getPersistenceUnitName() + ".";
+        String prefix = "richard.datasource." + emf.getPersistenceUnitName() + ".";
         String entityPackage = environment.getProperty(prefix + "entity");
         Assert.notNull(entityPackage, "Entity package is necessary!");
 
