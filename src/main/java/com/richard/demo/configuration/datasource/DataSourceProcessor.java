@@ -42,7 +42,7 @@ public class DataSourceProcessor implements BeanPostProcessor, BeanFactoryAware,
                 || !beanName.endsWith(dataSource.getPoolName() + "DataSource")) {
             return originDataSource;
         }
-        String prefix = "richard.datasource." + dataSource.getPoolName() + ".";
+        String prefix = "richard.datasource." + dataSource.getDataSourceClassName() + ".";
 
         dataSource.setJdbcUrl(environment.getProperty(prefix + "url"));
         dataSource.setDriverClassName(environment.getProperty(prefix + "driverClassName"));

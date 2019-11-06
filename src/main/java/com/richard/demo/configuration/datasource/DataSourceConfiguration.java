@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.boot.jdbc.metadata.HikariDataSourcePoolMetadata;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -19,9 +21,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration("DataSourceConfiguration")
+@Import(JpaRepositoriesAutoConfiguration.class)
 @EnableTransactionManagement
 @Slf4j
-public class DataSourceConfiuration {
+public class DataSourceConfiguration {
 
     @Bean
     public BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
@@ -47,7 +50,7 @@ public class DataSourceConfiuration {
     @EnableJpaRepositories(entityManagerFactoryRef = "default" + "EntityManagerFactory",
             transactionManagerRef = "default" + "TransactionManager",
             basePackages = "richard.datasource.default.repository")
-    @ConditionalOnProperty(prefix = "richard.datasource." + "default", name = {"driverClassName", "url", "username", "password"})
+    @ConditionalOnProperty(prefix = "richard.datasource." + "default", name = {"driver", "url", "username", "password"})
     public static class DefaultDataSource {
 
     }
