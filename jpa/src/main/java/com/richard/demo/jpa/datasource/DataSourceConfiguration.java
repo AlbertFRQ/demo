@@ -36,11 +36,12 @@ public class DataSourceConfiguration {
         return new DataSourceProcessor();
     }
 
+    @Primary
     @Configuration
     @EnableDataSource("default")
     @EnableJpaRepositories(entityManagerFactoryRef = "default" + "EntityManagerFactory",
             transactionManagerRef = "default" + "TransactionManager",
-            basePackages = "richard.datasource.default.repository")
+            basePackages = "${synnex.datasource." + "default" + ".repository}")
     @ConditionalOnProperty(prefix = "richard.datasource." + "default", name = {"driver", "url", "username", "password"})
     protected static class defaultDataSourceConfiguration {
 
