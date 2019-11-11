@@ -9,7 +9,8 @@
 	<modules>
 		<module>jpa</module>
         <module>cache</module>
-    </modules>
+		<module>basic</module>
+	</modules>
 	<packaging>pom</packaging>
 
 	<name>demo</name>
@@ -66,6 +67,12 @@
 		<dependency>
 			<groupId>com.richard</groupId>
 			<artifactId>jpa</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.richard</groupId>
+			<artifactId>basic</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
     </dependencies>
