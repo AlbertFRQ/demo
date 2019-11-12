@@ -1,7 +1,6 @@
 package com.richard.demo.basic;
 
 import com.richard.demo.basic.util.BasicUtil;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -10,7 +9,6 @@ import org.springframework.core.env.MutablePropertySources;
 
 import java.util.LinkedHashMap;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ExcludeInitializer implements ApplicationContextInitializer {
 
