@@ -15,4 +15,13 @@ public interface CacheTime {
     int HALF_MONTH = ONE_DAY * 15;
     int ONE_MONTH = ONE_DAY * 30;
     int THREE_MONTHS = ONE_DAY * 90;
+
+    /**
+     * Half and hour
+     */
+    int DEFAULT = HALF_AN_HOUR;
+    /**
+     * Minimum TTL allowed
+     */
+    int MIN = 30;
 }

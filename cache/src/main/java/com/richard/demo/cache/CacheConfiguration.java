@@ -1,5 +1,7 @@
 package com.richard.demo.cache;
 
+import com.richard.demo.cache.util.CacheExpireConfigProcessor;
+import com.richard.demo.cache.util.CacheExpireWriter;
 import com.richard.demo.cache.util.CacheKey;
 import com.richard.demo.cache.util.CacheTime;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.lang.Nullable;
 
 import java.time.Duration;
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -64,6 +67,12 @@ public class CacheConfiguration extends CachingConfigurerSupport implements Envi
         stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
         stringRedisTemplate.setEnableTransactionSupport(false);
         return stringRedisTemplate;
+    }
+
+    @Primary
+    @Bean
+    public CacheExpireWriter cacheExpireWriter(List<CacheExpireConfigProcessor> list, RedisConnectionFactory redisConnectionFactory) {
+        return new CacheExpireWriter(list, redisConnectionFactory, environment);
     }
 
     @Primary
