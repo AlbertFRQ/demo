@@ -31,6 +31,12 @@ public class DataSourceConfiguration {
         };
     }
 
+    @Primary
+    @Bean
+    public PrimaryDataSourceProcessor primaryDataSourceProcessor() {
+        return new PrimaryDataSourceProcessor();
+    }
+
     @Bean
     public BeanPostProcessor dataSourcePostProcessor() {
         return new DataSourceProcessor();
