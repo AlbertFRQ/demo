@@ -25,7 +25,7 @@ public class PrimaryDataSourceProcessor implements BeanDefinitionRegistryPostPro
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         String[] beanNames = beanFactory.getBeanNamesForType(DataSource.class);
-        if (beanNames.length < 1) {
+        if (beanNames.length <= 1) {
             return;
         }
         String primaryDataSourceName = environment.getProperty("richard.datasource.default");

@@ -5,6 +5,7 @@ import com.richard.demo.jpa.util.JpaUtil;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Configuration("DataSourceConfiguration")
+@Configuration("richardDataSourceConfiguration")
 @Import(JpaRepositoriesAutoConfiguration.class)
 @EnableTransactionManagement
 @Slf4j
@@ -31,9 +32,8 @@ public class DataSourceConfiguration {
         };
     }
 
-    @Primary
     @Bean
-    public PrimaryDataSourceProcessor primaryDataSourceProcessor() {
+    public static BeanDefinitionRegistryPostProcessor primaryDataSourceProcessor() {
         return new PrimaryDataSourceProcessor();
     }
 

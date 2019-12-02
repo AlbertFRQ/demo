@@ -10,7 +10,9 @@
 		<module>jpa</module>
         <module>cache</module>
 		<module>basic</module>
-	</modules>
+        <module>web</module>
+        <module>kafka</module>
+    </modules>
 	<packaging>pom</packaging>
 
 	<name>demo</name>
