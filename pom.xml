@@ -12,6 +12,7 @@
 		<module>basic</module>
         <module>web</module>
         <module>kafka</module>
+        <module>stream</module>
     </modules>
 	<packaging>pom</packaging>
 

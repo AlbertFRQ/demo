@@ -22,5 +22,6 @@ public class SendToAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         String methodName = signature.getName();
         String className = signature.getDeclaringTypeName();
+        Class<?>[] parameterTypes = signature.getParameterTypes();
     }
 }
