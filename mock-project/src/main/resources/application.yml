@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: 192.168.86.201:9092
+      bindings:
+        input:
+          destination: ${KUBERNETES_NAMESPACE}.yourInputTopic
+          group: yourInputGroup
+        output:
+          destination: ${KUBERNETES_NAMESPACE}.yourOutputTopic
