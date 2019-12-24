@@ -1,9 +1,0 @@
-richard:
-    datasource:
-        default:
-            driver: com.mysql.jdbc.Driver
-            url: jdbc:mysql://localhost:3306/userinfo
-            username: root
-            password: 1234
-            repository: com.richard.demo.repository
-            entity: com.richard.demo.entity

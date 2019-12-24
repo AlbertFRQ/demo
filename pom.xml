@@ -14,6 +14,7 @@
         <module>kafka</module>
         <module>stream</module>
         <module>mock-project</module>
+        <module>purchase</module>
     </modules>
 	<packaging>pom</packaging>
 
