@@ -17,6 +17,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.listener.AbstractMessageListenerContainer;
 import org.springframework.kafka.support.LoggingProducerListener;
 import org.springframework.kafka.support.ProducerListener;
 
@@ -78,8 +79,9 @@ public class KafkaConfiguration {
         configurer.configure(factory, consumerFactory);
         factory.setAutoStartup(true);
         factory.setConcurrency(3);
-        factory.getContainerProperties().setAckMode(kafkaProperties.getListener().getAckMode());
-        factory.getContainerProperties().setPollTimeout(kafkaProperties.getListener().getPollTimeout().toMillis());
+        factory.getContainerProperties().setAckMode(kafkaProperties.getListener().getAckMode() != null ? kafkaProperties.getListener().getAckMode() : AbstractMessageListenerContainer.AckMode.BATCH);
+//        factory.getContainerProperties().setPollTimeout(kafkaProperties.getListener().getPollTimeout().toMillis());
+        factory.getContainerProperties().setPollTimeout(10000);
         return factory;
     }
 
@@ -92,8 +94,9 @@ public class KafkaConfiguration {
         factory.setAutoStartup(true);
         factory.setBatchListener(true);
         factory.setConcurrency(3);
-        factory.getContainerProperties().setAckMode(kafkaProperties.getListener().getAckMode());
-        factory.getContainerProperties().setPollTimeout(kafkaProperties.getListener().getPollTimeout().toMillis());
+        factory.getContainerProperties().setAckMode(kafkaProperties.getListener().getAckMode() != null ? kafkaProperties.getListener().getAckMode() : AbstractMessageListenerContainer.AckMode.BATCH);
+//        factory.getContainerProperties().setPollTimeout(kafkaProperties.getListener().getPollTimeout().toMillis());
+        factory.getContainerProperties().setPollTimeout(10000);
         return factory;
     }
 }

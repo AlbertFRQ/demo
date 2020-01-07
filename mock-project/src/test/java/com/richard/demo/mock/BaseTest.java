@@ -1,5 +1,6 @@
 package com.richard.demo.mock;
 
+import com.richard.demo.PackageAnchor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +27,7 @@ public class BaseTest extends AbstractTestNGSpringContextTests {
     }
 
     @Configuration
-    @ComponentScan(basePackages = "com.richard.demo.mock")
+    @ComponentScan(basePackageClasses = {PackageAnchor.class}, basePackages = "com.richard.demo.mock")
     static class TestConfiguration {
 
     }

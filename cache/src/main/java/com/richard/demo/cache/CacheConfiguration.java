@@ -101,6 +101,15 @@ public class CacheConfiguration extends CachingConfigurerSupport implements Envi
         };
     }
 
+    /**
+     * This bean is created to avoid empty List<CacheExpireConfigProcessor> when creating cacheExpireWriter
+     * @return
+     */
+    @Bean
+    public CacheExpireConfigProcessor defaultCacheExpireConfigProcessor() {
+        return cacheExpireData -> {};
+    }
+
     @Override
     @Bean
     public KeyGenerator keyGenerator() {
