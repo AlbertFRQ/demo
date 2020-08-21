@@ -1,6 +1,6 @@
 package com.richard.demo.basic;
 
-import com.richard.demo.basic.util.BasicUtil;
+import com.google.common.collect.Sets;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class ExcludeInitializer implements ApplicationContextInitializer {
 
-    private final static Set<String> EXCLUDE_SET = BasicUtil.setOf(
+    private final static Set<String> EXCLUDE_SET = Sets.newHashSet(
             "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
             "org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration",
             "org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration");
