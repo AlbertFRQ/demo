@@ -1,4 +1,4 @@
-package com.richard.demo.cache;
+package com.richard.demo.cache.configuration;
 
 import com.richard.demo.cache.util.CacheExpireConfigProcessor;
 import com.richard.demo.cache.util.CacheExpireWriter;
