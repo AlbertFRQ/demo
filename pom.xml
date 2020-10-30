@@ -15,6 +15,7 @@
         <module>stream</module>
         <module>mock-project</module>
         <module>purchase</module>
+        <module>datasource</module>
     </modules>
 	<packaging>pom</packaging>
 

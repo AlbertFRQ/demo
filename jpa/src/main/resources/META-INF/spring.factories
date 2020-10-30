@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.richard.demo.jpa.datasource.DataSourceConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.richard.demo.jpa.datasource.StaticJpaConfiguration,\
+com.richard.demo.jpa.datasource.DynamicJpaConfiguration

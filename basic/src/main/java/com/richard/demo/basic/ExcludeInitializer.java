@@ -3,6 +3,7 @@ package com.richard.demo.basic;
 import com.google.common.collect.Sets;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.Ordered;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.MutablePropertySources;
@@ -10,7 +11,7 @@ import org.springframework.core.env.MutablePropertySources;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
-public class ExcludeInitializer implements ApplicationContextInitializer {
+public class ExcludeInitializer implements ApplicationContextInitializer, Ordered {
 
     private final static Set<String> EXCLUDE_SET = Sets.newHashSet(
             "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
@@ -32,5 +33,10 @@ public class ExcludeInitializer implements ApplicationContextInitializer {
             sources.addLast(source);
         }
         return source;
+    }
+
+    @Override
+    public int getOrder() {
+        return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 }

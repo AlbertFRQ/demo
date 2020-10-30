@@ -2,8 +2,11 @@ package com.richard.demo.mock.test;
 
 import com.richard.demo.mock.BaseTest;
 import com.richard.demo.mock.service.MockService;
+import org.mockito.internal.util.collections.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
+
+import java.util.Set;
 
 public class ServiceTest extends BaseTest {
 
@@ -12,6 +15,9 @@ public class ServiceTest extends BaseTest {
 
     @Test
     public void testFib() {
-        System.out.println(mockService.getFibonacci(5));
+        String a = "aa";
+        Set<String> set = Sets.newSet(a);
+        a = "aaa";
+        System.out.println(set);
     }
 }
