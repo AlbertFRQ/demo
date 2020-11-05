@@ -12,7 +12,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -100,6 +102,33 @@ public class SpringContext {
         }
 
         return Collections.unmodifiableSet(result);
+    }
+
+    public static Map<String, String> getEnumerableProperties(Environment environment, String keyPrefix) {
+        Assert.state(StringUtils.hasText(keyPrefix), "keyPrefix required");
+
+        String prefix = keyPrefix.endsWith(".") ? keyPrefix : (keyPrefix + ".");
+        String cacheKey = SpringContext.class.getName() + "#getEnumerableProperties#" + prefix;
+        Map<String, String> result = (Map<String, String>) getTransientProperty(cacheKey, environment);
+
+        if (result == null) {
+            result = new LinkedHashMap<>();
+            for (PropertySource<?> propertySource : ((ConfigurableEnvironment) environment).getPropertySources()) {
+                if (propertySource instanceof EnumerablePropertySource) {
+                    for (String key : ((EnumerablePropertySource<?>) propertySource).getPropertyNames()) {
+                        if (key.startsWith(prefix)) {
+                            String propKey = key.substring(prefix.length());
+                            if (!result.containsKey(propKey)) {
+                                result.put(propKey, environment.getProperty(key));
+                            }
+                        }
+                    }
+                }
+            }
+            setTransientProperty(cacheKey, result);
+        }
+
+        return Collections.unmodifiableMap(result);
     }
 
     public static Object getTransientProperty(String key) {

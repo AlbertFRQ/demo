@@ -16,6 +16,7 @@
         <module>mock-project</module>
         <module>purchase</module>
         <module>datasource</module>
+        <module>mybatis</module>
     </modules>
 	<packaging>pom</packaging>
 

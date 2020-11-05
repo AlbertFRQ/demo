@@ -3,6 +3,7 @@ package com.richard.demo.jpa.datasource;
 import com.richard.demo.basic.util.SpringContext;
 import com.richard.demo.datasource.DataSourceFactory;
 import com.richard.demo.datasource.log.HikariLogDataSource;
+import com.richard.demo.datasource.util.DataSourceUtil;
 import com.richard.demo.jpa.util.JpaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.FactoryBean;
@@ -25,17 +26,16 @@ public class DynamicJpaRegistrar implements ImportBeanDefinitionRegistrar {
         DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) registry;
         for (String dataSourceName : DataSourceFactory.registerIfAbsent(registry)) {
             DataSource dataSource = (DataSource) beanFactory.getBean(dataSourceName + "DataSource");
-            HikariLogDataSource logDataSource = JpaUtil.unwrap(dataSource, HikariLogDataSource.class);
+            HikariLogDataSource logDataSource = DataSourceUtil.unwrap(dataSource, HikariLogDataSource.class);
             if (logDataSource != null) {
                 log.info("Data Source JPA related beans registering, {}", dataSourceName);
-                registerJpaBeans(dataSourceName, dataSource, registry);
+                registerJpaBeans(dataSourceName, dataSource, beanFactory);
             }
         }
     }
 
-    private void registerJpaBeans(String name, DataSource dataSource, BeanDefinitionRegistry beanDefinitionRegistry) {
-        DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) beanDefinitionRegistry;
-        Environment environment = SpringContext.getEnvironment();
+    private void registerJpaBeans(String name, DataSource dataSource, DefaultListableBeanFactory beanFactory) {
+        Environment environment = beanFactory.getBean(Environment.class);
 
         JpaFactory jpaFactory = beanFactory.getBean(JpaFactory.class);
         LocalContainerEntityManagerFactoryBean factoryBean = jpaFactory.entityManagerFactory(name, dataSource, environment);

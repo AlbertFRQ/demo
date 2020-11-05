@@ -16,7 +16,9 @@ public class ExcludeInitializer implements ApplicationContextInitializer, Ordere
     private final static Set<String> EXCLUDE_SET = Sets.newHashSet(
             "org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration",
             "org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration",
-            "org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration");
+            "org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration",
+            "org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration",
+            "com.baomidou.mybatisplus.autoconfigure.MybatisPlusAutoConfiguration");
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {

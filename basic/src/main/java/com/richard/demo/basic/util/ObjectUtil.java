@@ -2,8 +2,10 @@ package com.richard.demo.basic.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import lombok.SneakyThrows;
 import org.springframework.cache.Cache;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.StringWriter;
@@ -12,9 +14,13 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class ObjectUtil {
+
+    private static final com.github.benmanes.caffeine.cache.Cache<String, Class> classCache =
+            Caffeine.newBuilder().expireAfterWrite(10, TimeUnit.MINUTES).maximumSize(2000).build();
 
     public static <T> T value(T value, T defaultValue) {
         return value != null ? value : defaultValue;
@@ -120,5 +126,9 @@ public class ObjectUtil {
 
     public static ObjectMapper getObjectMapper() {
         return SpringContext.getBean(ObjectMapper.class);
+    }
+
+    public static Class<?> resolveClassName(String className) {
+        return classCache.get(className, cn -> ClassUtils.resolveClassName(cn, null));
     }
 }
